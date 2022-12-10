@@ -10,23 +10,11 @@ interface JumbotronProps {
 function Jumbotron(props: JumbotronProps) {
   const { store } = props;
 
-  function run(e: JSX.EventContext<unknown, MouseEvent>) {
-    const tr = document.querySelector("table tbody tr") as HTMLElement;
-    step(tr);
-    function step(tr: HTMLElement) {
-      const label = tr.querySelector(".lbl") as HTMLElement;
-      label.click();
-
-      setTimeout(() => step(tr.nextSibling as HTMLElement), 40);
-    }
-  }
-
   return (
     <div class="jumbotron">
       <div class="row">
         <div class="col-md-6">
           <h1>XaniaJS-"keyed"</h1>
-          <button click={run}>run</button>
         </div>
         <div class="col-md-6">
           <div class="row">
@@ -101,7 +89,7 @@ export function Container() {
   const store = new TableStore();
 
   const row = useContext<DataRow>();
-  const danger = row.defer("danger");
+  const danger = row.lazy("danger");
   return (
     <div class="container">
       <Jumbotron store={store} />
